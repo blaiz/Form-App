@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Form:</b>
+  <%= @form_field.form %>
+</p>
+
+<p>
+  <b>Field:</b>
+  <%= @form_field.field %>
+</p>
+
+<p>
+  <b>Weight:</b>
+  <%= @form_field.weight %>
+</p>
+
+
+<%= link_to 'Edit', edit_form_field_path(@form_field) %> |
+<%= link_to 'Back', form_fields_path %>

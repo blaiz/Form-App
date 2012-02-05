@@ -1,0 +1,25 @@
+<h1>Listing field_types</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Html type</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @field_types.each do |field_type| %>
+  <tr>
+    <td><%= field_type.name %></td>
+    <td><%= field_type.html_type %></td>
+    <td><%= link_to 'Show', field_type %></td>
+    <td><%= link_to 'Edit', edit_field_type_path(field_type) %></td>
+    <td><%= link_to 'Destroy', field_type, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Field type', new_field_type_path %>

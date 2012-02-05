@@ -1,0 +1,51 @@
+<%= form_for(@form_instance) do |f| %>
+  <% if @form_instance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@form_instance.errors.count, "error") %> prohibited this form_instance from being saved:</h2>
+
+      <ul>
+      <% @form_instance.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :form %><br />
+    <%= f.text_field :form %>
+  </div>
+  <div class="field">
+    <%= f.label :respondent %><br />
+    <%= f.text_field :respondent %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+<p><%= @form.instructions %></p>
+
+<%= form_tag do %>
+  <%= hidden_field_tag("form_id", @form.id) %>
+  <% @form_fields.each do |form_field| %>
+  <% puts "====="+YAML::dump(@responses[form_field.id])+"=====" %>
+  <% value = @responses[form_field.id].nil? ? nil : @responses[form_field.id].value %>
+    <div class="field">
+      <%= label_tag("field-"+form_field.id.to_s, form_field.field.label) %>:<br/>
+      <% if form_field.field.field_type.html_type == 'textarea' %>
+          <%= text_area_tag "field["+form_field.id.to_s+"]", value, :id => "field-"+form_field.id.to_s %>
+      <% else %>
+          <input
+            id="field-<%= form_field.id %>"
+            name="<%= "field["+form_field.id.to_s+"]" %>"
+            type="<%= form_field.field.field_type.html_type %>"
+            value="<%= value %>"
+          />
+      <% end %>
+    </div>
+  <% end %>
+  <div class="actions">
+    <%= submit_tag("Submit form") %>
+  </div>
+<% end %>

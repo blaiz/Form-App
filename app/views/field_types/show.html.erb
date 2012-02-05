@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @field_type.name %>
+</p>
+
+<p>
+  <b>Html type:</b>
+  <%= @field_type.html_type %>
+</p>
+
+
+<%= link_to 'Edit', edit_field_type_path(@field_type) %> |
+<%= link_to 'Back', field_types_path %>
