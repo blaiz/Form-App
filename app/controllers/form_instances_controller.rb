@@ -25,6 +25,17 @@ class FormInstancesController < ApplicationController
   # GET /form_instances/new.json
   def new
     @form_instance = FormInstance.new
+    @form_instance.form_id = params[:id]
+    #@form = Form.find_by_url(params[:id])
+    @form_fields = FormField.order('weight ASC').find_all_by_form_id(@form.id)
+    form_field_ids = Array.new
+    @form_fields.each do |f|
+      form_field_ids.push(f.id)
+    end
+    @responses = Array.new
+    Response.find_all_by_form_field_id_and_respondent_id(form_field_ids, 1).each do |d|
+      @responses[d.form_field_id] = d
+    end
 
     respond_to do |format|
       format.html # new.html.erb

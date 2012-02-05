@@ -1,3 +1,5 @@
+<p><%= @form_instance.form.instructions %></p>
+
 <%= form_for(@form_instance) do |f| %>
   <% if @form_instance.errors.any? %>
     <div id="error_explanation">
@@ -19,14 +21,6 @@
     <%= f.label :respondent %><br />
     <%= f.text_field :respondent %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-
-<p><%= @form.instructions %></p>
-
-<%= form_tag do %>
   <%= hidden_field_tag("form_id", @form.id) %>
   <% @form_fields.each do |form_field| %>
   <% puts "====="+YAML::dump(@responses[form_field.id])+"=====" %>
@@ -46,6 +40,6 @@
     </div>
   <% end %>
   <div class="actions">
-    <%= submit_tag("Submit form") %>
+    <%= f.submit %>
   </div>
 <% end %>

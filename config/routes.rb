@@ -11,8 +11,10 @@ FormApp::Application.routes.draw do
 
   resources :fields
   
-  match 'respond/:id' => 'responses#edit', :via => [:get]
-  match 'respond/:id' => 'responses#update', :via => [:post]
+  match 'respond/new/:id' => 'responses#new', :via => [:get]
+  match 'respond/new/:id' => 'responses#create', :via => [:post]
+  match 'respond/edit/:id' => 'responses#edit', :via => [:get]
+  match 'respond/edit/:id' => 'responses#update', :via => [:post]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
