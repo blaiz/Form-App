@@ -25,17 +25,8 @@ class FormInstancesController < ApplicationController
   # GET /form_instances/new.json
   def new
     @form_instance = FormInstance.new
-    @form_instance.form_id = params[:id]
-    #@form = Form.find_by_url(params[:id])
-    @form_fields = FormField.order('weight ASC').find_all_by_form_id(@form.id)
-    form_field_ids = Array.new
-    @form_fields.each do |f|
-      form_field_ids.push(f.id)
-    end
-    @responses = Array.new
-    Response.find_all_by_form_field_id_and_respondent_id(form_field_ids, 1).each do |d|
-      @responses[d.form_field_id] = d
-    end
+    @form_instance.form = Form.find_by_url(params[:id])
+    @form_instance.respondent = Respondent.find(1)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,22 +37,18 @@ class FormInstancesController < ApplicationController
   # GET /form_instances/1/edit
   def edit
     @form_instance = FormInstance.find(params[:id])
-    @form = Form.find_by_url(params[:id])
-    @form_fields = FormField.order('weight ASC').find_all_by_form_id(@form.id)
-    form_field_ids = Array.new
-    @form_fields.each do |f|
-      form_field_ids.push(f.id)
-    end
-    @responses = Array.new
-    Response.find_all_by_form_field_id_and_respondent_id(form_field_ids, 1).each do |d|
-      @responses[d.form_field_id] = d
-    end
   end
 
   # POST /form_instances
   # POST /form_instances.json
   def create
-    @form_instance = FormInstance.new(params[:form_instance])
+    @form_instance = FormInstance.new
+    @form_instance.form = Form.find(params[:form_id])
+    @form_instance.respondent = Respondent.find(1)
+    
+    params[:field].each do |id,value|
+      Response.create(:form_field_id => id, :form_instance => @form_instance, :value => value) unless value.blank?
+    end
 
     respond_to do |format|
       if @form_instance.save
@@ -78,17 +65,16 @@ class FormInstancesController < ApplicationController
   # PUT /form_instances/1.json
   def update
     @form_instance = FormInstance.find(params[:id])
-    @form = Form.find(params[:form_id])
     
     params[:field].each do |id,value|
-      if (response = Response.find_by_form_field_id_and_respondent_id(id, 1))
+      if (response = @form_instance.responses.find_by_form_field_id(id))
         if (value.blank?)
           response.destroy
         else
           response.update_attributes(:value => value)
         end
       else
-        Response.create(:form_field_id => id, :respondent_id => 1, :value => value) unless value.blank?
+        Response.create(:form_field_id => id, :form_instance => @form_instance, :value => value) unless value.blank?
       end
     end
 
