@@ -1,18 +1,17 @@
 FormApp::Application.routes.draw do
-  resources :form_instances
-
   resources :form_fields
 
   resources :respondents
 
-  resources :forms
+  resources :forms do
+    resources :form_instances
+  end
+  
+  resources :form_instances
 
   resources :field_types
 
   resources :fields
-  
-  match 'respond/new/:id' => 'form_instances#new', :via => [:get]
-  match 'respond/new/:id' => 'form_instances#create', :via => [:post]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

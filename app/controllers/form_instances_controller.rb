@@ -2,7 +2,7 @@ class FormInstancesController < ApplicationController
   # GET /form_instances
   # GET /form_instances.json
   def index
-    @form_instances = FormInstance.all
+    @form_instances = FormInstance.find_all_by_form_id(Form.find_by_url(params[:form_id]))
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,7 +25,7 @@ class FormInstancesController < ApplicationController
   # GET /form_instances/new.json
   def new
     @form_instance = FormInstance.new
-    @form_instance.form = Form.find_by_url(params[:id])
+    @form_instance.form = Form.find_by_url(params[:form_id])
     @form_instance.respondent = Respondent.find(1)
 
     respond_to do |format|
@@ -52,8 +52,12 @@ class FormInstancesController < ApplicationController
 
     respond_to do |format|
       if @form_instance.save
-        format.html { redirect_to @form_instance, :notice => 'Form instance was successfully created.' }
-        format.json { render :json => @form_instance, :status => :created, :location => @form_instance }
+        if (@form_instance.form.next_form.nil?)
+          format.html { redirect_to @form_instance, :notice => 'Form instance was successfully created.' }
+          format.json { render :json => @form_instance, :status => :created, :location => @form_instance }
+        else
+          format.html { redirect_to new_form_form_instance_path(@form_instance.form.next_form), :notice => 'Form instance was successfully created.' }
+        end
       else
         format.html { render :action => "new" }
         format.json { render :json => @form_instance.errors, :status => :unprocessable_entity }
@@ -80,8 +84,16 @@ class FormInstancesController < ApplicationController
 
     respond_to do |format|
       if @form_instance.update_attributes(params[:form_instance])
-        format.html { redirect_to @form_instance, :notice => 'Form instance was successfully updated.' }
-        format.json { head :no_content }
+        if (@form_instance.next_form_instance.nil?)
+          if (@form_instance.form.next_form.nil?)
+            format.html { redirect_to @form_instance, :notice => 'Form instance was successfully updated.' }
+            format.json { head :no_content }
+          else
+            format.html { redirect_to new_form_form_instance_path(@form_instance.form.next_form), :notice => 'Form instance was successfully updated.' }
+          end
+        else
+          format.html { redirect_to edit_form_instance_path(@form_instance.next_form_instance), :notice => 'Form instance was successfully updated.' }
+        end
       else
         format.html { render :action => "edit" }
         format.json { render :json => @form_instance.errors, :status => :unprocessable_entity }

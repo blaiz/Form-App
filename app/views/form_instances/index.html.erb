@@ -11,8 +11,8 @@
 
 <% @form_instances.each do |form_instance| %>
   <tr>
-    <td><%= form_instance.form %></td>
-    <td><%= form_instance.respondent %></td>
+    <td><%= form_instance.form.name %></td>
+    <td><%= form_instance.respondent.name %></td>
     <td><%= link_to 'Show', form_instance %></td>
     <td><%= link_to 'Edit', edit_form_instance_path(form_instance) %></td>
     <td><%= link_to 'Destroy', form_instance, :confirm => 'Are you sure?', :method => :delete %></td>
@@ -22,4 +22,4 @@
 
 <br />
 
-<%= link_to 'New Form instance', new_form_instance_path %>
+<%= link_to 'New Form instance', new_form_form_instance_path(params[:form_id]) %>

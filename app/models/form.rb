@@ -3,6 +3,9 @@ class Form < ActiveRecord::Base
   has_many :fields, :through => :form_fields
   has_many :form_instances
   
+  belongs_to :next_form, :class_name => "Form"
+  has_one :previous_form, :class_name => "Form", :foreign_key => "next_form_id"
+  
   acts_as_url :name
   
   def to_param

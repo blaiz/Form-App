@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120205032442) do
+ActiveRecord::Schema.define(:version => 20120205230114) do
 
   create_table "field_types", :force => true do |t|
     t.string   "name"
@@ -41,8 +41,9 @@ ActiveRecord::Schema.define(:version => 20120205032442) do
   create_table "form_instances", :force => true do |t|
     t.integer  "form_id"
     t.integer  "respondent_id"
-    t.datetime "created_at",    :null => false
-    t.datetime "updated_at",    :null => false
+    t.datetime "created_at",            :null => false
+    t.datetime "updated_at",            :null => false
+    t.integer  "next_form_instance_id"
   end
 
   add_index "form_instances", ["form_id"], :name => "index_form_instances_on_form_id"
@@ -54,6 +55,7 @@ ActiveRecord::Schema.define(:version => 20120205032442) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.string   "url"
+    t.integer  "next_form_id"
   end
 
   create_table "respondents", :force => true do |t|
