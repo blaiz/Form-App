@@ -7,9 +7,9 @@ class Form < ActiveRecord::Base
   belongs_to :next_form, :class_name => "Form"
   has_one :previous_form, :class_name => "Form", :foreign_key => "next_form_id"
   
-  acts_as_url :name
+  acts_as_url :label, :url_attribute => :name
   
   def to_param
-    url
+    name
   end
 end

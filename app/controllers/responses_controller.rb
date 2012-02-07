@@ -23,7 +23,7 @@ class ResponsesController < ApplicationController
 
   # GET /respond/form_id
   def edit
-    @form = Form.find_by_url(params[:id])
+    @form = Form.find_by_name(params[:id])
     @form_fields = FormField.order('weight ASC').find_all_by_form_id(@form.id)
     form_field_ids = Array.new
     @form_fields.each do |f|

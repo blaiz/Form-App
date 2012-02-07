@@ -11,7 +11,7 @@
 
 <% @forms.each do |form| %>
   <tr>
-    <td><%= form.name %></td>
+    <td><%= form.label %></td>
     <td><%= form.instructions %></td>
     <td><%= link_to 'Show', form %></td>
     <td><%= link_to 'Edit', edit_form_path(form) %></td>

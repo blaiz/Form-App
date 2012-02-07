@@ -1,4 +1,4 @@
-<h1>Listing form_instances</h1>
+<h1>Listing <%= @form.label.pluralize %></h1>
 
 <table>
   <tr>
@@ -11,7 +11,7 @@
 
 <% @form.form_instances.each do |form_instance| %>
   <tr>
-    <td><%= @form.name %></td>
+    <td><%= @form.label %></td>
     <td><%= form_instance.respondent.name %></td>
     <td><%= link_to 'Show', form_instance %></td>
     <td><%= link_to 'Edit', edit_form_instance_path(form_instance) %></td>

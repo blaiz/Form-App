@@ -20,17 +20,8 @@
          @form_instance.responses.find_by_form_field_id(form_field.id).value
     %>
     <div class="field">
-      <%= label_tag("field-"+form_field.id.to_s, form_field.field.label) %>:<br/>
-      <% if form_field.field.field_type.html_type == 'textarea' %>
-          <%= text_area_tag "field["+form_field.id.to_s+"]", value, :id => "field-"+form_field.id.to_s %>
-      <% else %>
-          <input
-            id="field-<%= form_field.id %>"
-            name="<%= "field["+form_field.id.to_s+"]" %>"
-            type="<%= form_field.field.field_type.html_type %>"
-            value="<%= value %>"
-          />
-      <% end %>
+      <%= label_tag("field_"+form_field.id.to_s, form_field.field.label) %>:<br/>
+      <%= send form_field.field.field_type.rails_type+"_tag", "field["+form_field.id.to_s+"]", value %>
     </div>
   <% end %>
   <div class="actions">

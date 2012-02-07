@@ -2,7 +2,7 @@ class FormInstancesController < ApplicationController
   # GET /form_instances
   # GET /form_instances.json
   def index
-    @form = Form.includes(:form_instances, :respondents).find_by_url(params[:form_id])
+    @form = Form.includes(:form_instances, :respondents).find_by_name(params[:form_id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -25,7 +25,7 @@ class FormInstancesController < ApplicationController
   # GET /form_instances/new.json
   def new
     @form_instance = FormInstance.new
-    @form_instance.form = Form.find_by_url(params[:form_id])
+    @form_instance.form = Form.find_by_name(params[:form_id])
     @form_instance.respondent = Respondent.find(1)
 
     respond_to do |format|

@@ -13,7 +13,7 @@ class FormsController < ApplicationController
   # GET /forms/1
   # GET /forms/1.json
   def show
-    @form = Form.find_by_url(params[:id])
+    @form = Form.find_by_name(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -34,7 +34,7 @@ class FormsController < ApplicationController
 
   # GET /forms/1/edit
   def edit
-    @form = Form.find_by_url(params[:id])
+    @form = Form.find_by_name(params[:id])
   end
 
   # POST /forms
@@ -56,7 +56,7 @@ class FormsController < ApplicationController
   # PUT /forms/1
   # PUT /forms/1.json
   def update
-    @form = Form.find_by_url(params[:id])
+    @form = Form.find_by_name(params[:id])
 
     respond_to do |format|
       if @form.update_attributes(params[:form])
@@ -72,7 +72,7 @@ class FormsController < ApplicationController
   # DELETE /forms/1
   # DELETE /forms/1.json
   def destroy
-    @form = Form.find_by_url(params[:id])
+    @form = Form.find_by_name(params[:id])
     @form.destroy
 
     respond_to do |format|
