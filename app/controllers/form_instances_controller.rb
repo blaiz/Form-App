@@ -2,11 +2,11 @@ class FormInstancesController < ApplicationController
   # GET /form_instances
   # GET /form_instances.json
   def index
-    @form_instances = FormInstance.find_all_by_form_id(Form.find_by_url(params[:form_id]))
+    @form = Form.includes(:form_instances, :respondents).find_by_url(params[:form_id])
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render :json => @form_instances }
+      format.json { render :json => @form }
     end
   end
 
