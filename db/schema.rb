@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120207174730) do
+ActiveRecord::Schema.define(:version => 20120213210921) do
 
   create_table "field_types", :force => true do |t|
     t.string   "label"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20120207174730) do
     t.integer  "weight"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "display"
   end
 
   add_index "form_fields", ["field_id"], :name => "index_form_fields_on_field_id"

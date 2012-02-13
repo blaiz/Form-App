@@ -14,14 +14,9 @@
   <% end %>
   <%= hidden_field_tag("form_id", @form_instance.form.id) %>
   <% @form_instance.form.form_fields.each do |form_field| %>
-    <% value = 
-         @form_instance.responses.find_by_form_field_id(form_field.id).nil? ? 
-         nil : 
-         @form_instance.responses.find_by_form_field_id(form_field.id).value
-    %>
     <div class="field">
       <%= label_tag("field_"+form_field.id.to_s, form_field.field.label) %>:<br/>
-      <%= send form_field.field.field_type.rails_type+"_tag", "field["+form_field.id.to_s+"]", value %>
+      <%= send form_field.field.field_type.rails_type+"_tag", "field["+form_field.id.to_s+"]", @form_instance.responses.find_or_create_by_form_field_id(form_field.id).value %>
     </div>
   <% end %>
   <div class="actions">

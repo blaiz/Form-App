@@ -2,17 +2,17 @@
 
 <table>
   <tr>
-    <th>Form</th>
-    <th>Respondent</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <% @form.form_fields.find_all_by_display(['label', 'show']).each do |form_field| %>
+    <th><%= form_field.field.label %></th>
+    <% end %>
+    <th colspan="3">Actions</th>
   </tr>
 
 <% @form.form_instances.each do |form_instance| %>
   <tr>
-    <td><%= @form.label %></td>
-    <td><%= form_instance.respondent.name %></td>
+    <% form_instance.form.form_fields.find_all_by_display(['label', 'show']).each do |form_field| %>
+    <td><%= form_instance.responses.find_or_create_by_form_field_id(form_field.id).value %></td>
+    <% end %>
     <td><%= link_to 'Show', form_instance %></td>
     <td><%= link_to 'Edit', edit_form_instance_path(form_instance) %></td>
     <td><%= link_to 'Destroy', form_instance, :confirm => 'Are you sure?', :method => :delete %></td>
@@ -22,4 +22,4 @@
 
 <br />
 
-<%= link_to 'New Form instance', new_form_form_instance_path(params[:form_id]) %>
+<%= link_to 'New '+@form.label, new_form_form_instance_path(params[:form_id]) %>
