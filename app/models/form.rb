@@ -4,8 +4,13 @@ class Form < ActiveRecord::Base
   has_many :form_instances
   has_many :respondents, :through => :form_instances
   
+  belongs_to :owner
+  
   belongs_to :next_form, :class_name => "Form"
   has_one :previous_form, :class_name => "Form", :foreign_key => "next_form_id"
+  
+  belongs_to :next_section_form, :class_name => "Form"
+  has_one :previous_section_form, :class_name => "Form", :foreign_key => "next_section_form_id"
   
   acts_as_url :label, :url_attribute => :name
   

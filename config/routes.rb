@@ -1,4 +1,6 @@
 FormApp::Application.routes.draw do
+  resources :owners
+
   resources :form_fields
 
   resources :respondents
