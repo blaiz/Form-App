@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120214192536) do
+ActiveRecord::Schema.define(:version => 20120215050310) do
 
   create_table "field_types", :force => true do |t|
     t.string   "label"
@@ -57,7 +57,6 @@ ActiveRecord::Schema.define(:version => 20120214192536) do
     t.datetime "updated_at",           :null => false
     t.string   "name"
     t.integer  "next_form_id"
-    t.integer  "owner_id"
     t.integer  "next_section_form_id"
   end
 
@@ -65,6 +64,15 @@ ActiveRecord::Schema.define(:version => 20120214192536) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "questionnaires", :force => true do |t|
+    t.string   "label"
+    t.string   "name"
+    t.integer  "owner_id"
+    t.integer  "start_form_id"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   create_table "respondents", :force => true do |t|

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  label: MyString
+  name: MyString
+  owner_id: 
+  start_form_id: 
+
+two:
+  label: MyString
+  name: MyString
+  owner_id: 
+  start_form_id: 

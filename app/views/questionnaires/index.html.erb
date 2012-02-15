@@ -1,0 +1,29 @@
+<h1>Listing questionnaires</h1>
+
+<table>
+  <tr>
+    <th>Label</th>
+    <th>Name</th>
+    <th>Owner</th>
+    <th>Start form</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @questionnaires.each do |questionnaire| %>
+  <tr>
+    <td><%= questionnaire.label %></td>
+    <td><%= questionnaire.name %></td>
+    <td><%= questionnaire.owner_id %></td>
+    <td><%= questionnaire.start_form_id %></td>
+    <td><%= link_to 'Show', questionnaire %></td>
+    <td><%= link_to 'Edit', edit_questionnaire_path(questionnaire) %></td>
+    <td><%= link_to 'Destroy', questionnaire, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Questionnaire', new_questionnaire_path %>

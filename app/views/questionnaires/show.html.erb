@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Label:</b>
+  <%= @questionnaire.label %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @questionnaire.name %>
+</p>
+
+<p>
+  <b>Owner:</b>
+  <%= @questionnaire.owner_id %>
+</p>
+
+<p>
+  <b>Start form:</b>
+  <%= @questionnaire.start_form_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_questionnaire_path(@questionnaire) %> |
+<%= link_to 'Back', questionnaires_path %>

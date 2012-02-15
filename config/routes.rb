@@ -2,7 +2,7 @@ FormApp::Application.routes.draw do
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "log_in" => "sessions#new", :as => "log_in"
   get "sign_up" => "users#new", :as => "sign_up"
-  root :to => "users#new"
+  root :to => "sessions#new"
   resources :users
   resources :sessions
 
@@ -11,6 +11,10 @@ FormApp::Application.routes.draw do
   resources :form_fields
 
   resources :respondents
+  
+  resources :questionnaires do
+    resources :forms
+  end
 
   resources :forms do
     resources :form_instances
