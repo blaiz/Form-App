@@ -40,3 +40,5 @@ gem 'jquery-rails'
 gem 'execjs'
 gem 'therubyracer'
 gem 'stringex'
+
+gem "bcrypt-ruby", :require => "bcrypt"

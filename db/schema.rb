@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120214041735) do
+ActiveRecord::Schema.define(:version => 20120214192536) do
 
   create_table "field_types", :force => true do |t|
     t.string   "label"
@@ -83,5 +83,13 @@ ActiveRecord::Schema.define(:version => 20120214041735) do
 
   add_index "responses", ["form_field_id"], :name => "index_responses_on_form_field_id"
   add_index "responses", ["form_instance_id"], :name => "index_responses_on_form_instance_id"
+
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.string   "password_hash"
+    t.string   "password_salt"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
+  end
 
 end
