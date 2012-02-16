@@ -2,9 +2,6 @@ class Form < ActiveRecord::Base
   has_many :form_fields, :order => 'weight ASC'
   has_many :fields, :through => :form_fields
   has_many :form_instances
-  has_many :respondents, :through => :form_instances
-  
-  belongs_to :owner
   
   belongs_to :next_form, :class_name => "Form"
   has_one :previous_form, :class_name => "Form", :foreign_key => "next_form_id"

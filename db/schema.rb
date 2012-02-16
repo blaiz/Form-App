@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120215050310) do
+ActiveRecord::Schema.define(:version => 20120216214703) do
 
   create_table "field_types", :force => true do |t|
     t.string   "label"
@@ -41,14 +41,13 @@ ActiveRecord::Schema.define(:version => 20120215050310) do
 
   create_table "form_instances", :force => true do |t|
     t.integer  "form_id"
-    t.integer  "respondent_id"
     t.datetime "created_at",            :null => false
     t.datetime "updated_at",            :null => false
     t.integer  "next_form_instance_id"
+    t.integer  "group_id"
   end
 
   add_index "form_instances", ["form_id"], :name => "index_form_instances_on_form_id"
-  add_index "form_instances", ["respondent_id"], :name => "index_form_instances_on_respondent_id"
 
   create_table "forms", :force => true do |t|
     t.string   "label"
@@ -60,25 +59,29 @@ ActiveRecord::Schema.define(:version => 20120215050310) do
     t.integer  "next_section_form_id"
   end
 
-  create_table "owners", :force => true do |t|
+  create_table "groups", :force => true do |t|
+    t.string   "type"
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "groups_questionnaires", :id => false, :force => true do |t|
+    t.integer "group_id"
+    t.integer "questionnaire_id"
+  end
+
+  create_table "groups_users", :id => false, :force => true do |t|
+    t.integer "group_id"
+    t.integer "user_id"
   end
 
   create_table "questionnaires", :force => true do |t|
     t.string   "label"
     t.string   "name"
-    t.integer  "owner_id"
     t.integer  "start_form_id"
     t.datetime "created_at",    :null => false
     t.datetime "updated_at",    :null => false
-  end
-
-  create_table "respondents", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
   end
 
   create_table "responses", :force => true do |t|

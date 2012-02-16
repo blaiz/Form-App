@@ -2,7 +2,7 @@ class FormInstancesController < ApplicationController
   # GET /form_instances
   # GET /form_instances.json
   def index
-    @form = Form.includes(:form_instances, :respondents).find_by_name(params[:form_id])
+    @form = Form.includes(:form_instances).find_by_name(params[:form_id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -26,7 +26,7 @@ class FormInstancesController < ApplicationController
   def new
     @form_instance = FormInstance.new
     @form_instance.form = Form.find_by_name(params[:form_id])
-    @form_instance.respondent = Respondent.find(1)
+#    @form_instance.respondent = Respondent.find(1)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -44,7 +44,7 @@ class FormInstancesController < ApplicationController
   def create
     @form_instance = FormInstance.new
     @form_instance.form = Form.find(params[:form_id])
-    @form_instance.respondent = Respondent.find(1)
+#    @form_instance.respondent = Respondent.find(1)
     
     params[:field].each do |id,value|
       Response.create(:form_field_id => id, :form_instance => @form_instance, :value => value) unless value.blank?

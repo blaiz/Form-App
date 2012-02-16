@@ -80,7 +80,7 @@
 
   </group>
 
-</datatypes><table x="584" y="657" name="field_types">
+</datatypes><table x="42" y="724" name="field_types">
 <row name="id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>nextval('field_types_id_seq'::regclass)</default></row>
@@ -100,7 +100,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="612" y="511" name="fields">
+<table x="48" y="571" name="fields">
 <row name="id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>nextval('fields_id_seq'::regclass)</default></row>
@@ -124,24 +124,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="77" y="226" name="respondents">
-<row name="id" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>nextval('respondents_id_seq'::regclass)</default></row>
-<row name="name" null="1" autoincrement="0">
-<datatype>VARCHAR</datatype>
-<default>NULL</default></row>
-<key type="CHECK" name="2200_16426_1_not_null">
-</key>
-<key type="CHECK" name="2200_16426_3_not_null">
-</key>
-<key type="CHECK" name="2200_16426_4_not_null">
-</key>
-<key type="PRIMARY" name="respondents_pkey">
-<part>id</part>
-</key>
-</table>
-<table x="578" y="346" name="form_fields">
+<table x="36" y="406" name="form_fields">
 <row name="id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>nextval('form_fields_id_seq'::regclass)</default></row>
@@ -169,7 +152,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="150" y="487" name="responses">
+<table x="251" y="437" name="responses">
 <row name="id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>nextval('data_id_seq'::regclass)</default></row>
@@ -194,7 +177,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="375" y="179" name="forms">
+<table x="212" y="180" name="forms">
 <row name="id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>nextval('forms_id_seq'::regclass)</default></row>
@@ -229,7 +212,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="133" y="346" name="form_instances">
+<table x="487" y="416" name="form_instances">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -237,22 +220,25 @@
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="forms" row="id" />
 </row>
-<row name="respondent_id" null="1" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="respondents" row="id" />
-</row>
 <row name="next_form_instance_id" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default><relation table="form_instances" row="id" />
+</row>
+<row name="group_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="groups" row="id" />
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
 </key>
 </table>
-<table x="157" y="25" name="owners">
+<table x="709" y="215" name="groups">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
+<row name="type" null="0" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>'respondent'</default></row>
 <row name="name" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
 <default>NULL</default></row>
@@ -260,7 +246,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="373" y="12" name="questionnaire">
+<table x="205" y="15" name="questionnaire">
 <row name="id" null="1" autoincrement="1">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -270,16 +256,53 @@
 <row name="name" null="1" autoincrement="0">
 <datatype>VARCHAR</datatype>
 <default>NULL</default></row>
-<row name="owner_id" null="0" autoincrement="0">
-<datatype>INTEGER</datatype>
-<default>NULL</default><relation table="owners" row="id" />
-</row>
 <row name="start_form_id" null="0" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>nextval('forms_id_seq'::regclass)</default><relation table="forms" row="id" />
 </row>
 <key type="PRIMARY" name="">
 <part>id</part>
+</key>
+</table>
+<table x="944" y="76" name="users">
+<row name="id" null="1" autoincrement="1">
+<datatype>INTEGER</datatype>
+<default>NULL</default></row>
+<row name="email" null="0" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>'NULL'</default></row>
+<row name="password_hash" null="0" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>'NULL'</default></row>
+<row name="password_salt" null="0" autoincrement="0">
+<datatype>VARCHAR</datatype>
+<default>'NULL'</default></row>
+<key type="PRIMARY" name="">
+<part>id</part>
+</key>
+</table>
+<table x="741" y="74" name="groups_users">
+<row name="group_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="groups" row="id" />
+</row>
+<row name="user_id" null="1" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="users" row="id" />
+</row>
+<key type="PRIMARY" name="">
+</key>
+</table>
+<table x="405" y="48" name="groups_questionnaires">
+<row name="group_id" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="groups" row="id" />
+</row>
+<row name="questionnaire_id" null="0" autoincrement="0">
+<datatype>INTEGER</datatype>
+<default>NULL</default><relation table="questionnaire" row="id" />
+</row>
+<key type="PRIMARY" name="">
 </key>
 </table>
 </sql>
