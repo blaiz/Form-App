@@ -12,21 +12,15 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :label %><br />
+    <%= f.label :label, "Questionnaire Name" %><br />
     <%= f.text_field :label %>
   </div>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :owner_id %><br />
-    <%= f.text_field :owner_id %>
-  </div>
-  <div class="field">
-    <%= f.label :start_form_id %><br />
-    <%= f.text_field :start_form_id %>
-  </div>
+  <%= fields_for :group do |group_f| %>
+    <div class="field">
+      <%= group_f.label :name, "Your Company Name" %><br />
+      <%= group_f.text_field :name %>
+    </div>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>

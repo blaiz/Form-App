@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120216214703) do
+ActiveRecord::Schema.define(:version => 20120217030805) do
 
   create_table "field_types", :force => true do |t|
     t.string   "label"
@@ -60,7 +60,7 @@ ActiveRecord::Schema.define(:version => 20120216214703) do
   end
 
   create_table "groups", :force => true do |t|
-    t.string   "type"
+    t.string   "group_type"
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false

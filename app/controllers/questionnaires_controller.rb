@@ -2,7 +2,8 @@ class QuestionnairesController < ApplicationController
   # GET /questionnaires
   # GET /questionnaires.json
   def index
-    @questionnaires = Questionnaire.all
+#    @questionnaires = Questionnaire.all
+    @questionnaires = current_user.questionnaires
 
     respond_to do |format|
       format.html # index.html.erb
@@ -41,10 +42,13 @@ class QuestionnairesController < ApplicationController
   # POST /questionnaires.json
   def create
     @questionnaire = Questionnaire.new(params[:questionnaire])
+    @group = Group.new(params[:group])
+    @group.group_type = "owner"
+    @group.questionnaires << @questionnaire
 
     respond_to do |format|
-      if @questionnaire.save
-        format.html { redirect_to @questionnaire, :notice => 'Questionnaire was successfully created.' }
+      if @questionnaire.save and @group.save
+        format.html { redirect_to @questionnaire, :notice => 'Questionnaire and group were successfully created.' }
         format.json { render :json => @questionnaire, :status => :created, :location => @questionnaire }
       else
         format.html { render :action => "new" }
