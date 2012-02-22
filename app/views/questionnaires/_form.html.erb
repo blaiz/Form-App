@@ -15,7 +15,7 @@
     <%= f.label :label, "Questionnaire Name" %><br />
     <%= f.text_field :label %>
   </div>
-  <%= fields_for :group do |group_f| %>
+  <%= fields_for @questionnaire.administrator do |group_f| %>
     <div class="field">
       <%= group_f.label :name, "Your Company Name" %><br />
       <%= group_f.text_field :name %>

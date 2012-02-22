@@ -1,4 +1,4 @@
-<h1>Listing forms</h1>
+<h1>Listing forms for <%= @questionnaire.label %></h1>
 
 <table>
   <tr>
@@ -9,12 +9,13 @@
     <th></th>
   </tr>
 
-<% @forms.each do |form| %>
+<% @questionnaire.forms.each do |form| %>
   <tr>
     <td><%= form.label %></td>
     <td><%= form.instructions %></td>
     <td><%= link_to 'Show', form %></td>
-    <td><%= link_to 'Edit', edit_form_path(form) %></td>
+    <td><%= link_to 'Rename', edit_form_path(form) %></td>
+    <td><%= link_to 'Edit Fields', form_form_fields_path(form) %></td>
     <td><%= link_to 'Destroy', form, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
@@ -22,4 +23,8 @@
 
 <br />
 
-<%= link_to 'New Form', new_form_path %>
+<%= link_to 'New Form', new_questionnaire_form_path %>
+
+<br />
+
+<%= link_to 'Go back to questionnaires', questionnaires_path %>

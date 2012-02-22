@@ -7,9 +7,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<p style="font-size: 32px;">Form App</p>
+<div style="background-color: #ddd; border-bottom: 1px solid grey; margin-bottom: 20px; padding: 20px; font-size: 32px;">Form App</div>
 
-<div>
+<nav id="user_nav" style="position: absolute; top: 20px; right: 20px;">
   <% if current_user %>
     Logged in as <%= current_user.email %>
     <%= link_to "Log out", log_out_path %>
@@ -17,7 +17,7 @@
     <%= link_to "Sign up", sign_up_path %> or
     <%= link_to "Log in", log_in_path %>
   <% end %>
-</div>
+</nav>
   
 <% flash.each do |name, msg| %>
   <%= content_tag :div, msg, :id => "flash_#{name}" %>

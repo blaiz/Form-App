@@ -2,7 +2,7 @@ class FormFieldsController < ApplicationController
   # GET /form_fields
   # GET /form_fields.json
   def index
-    @form_fields = FormField.all
+    @form = Form.find_by_name(params[:form_id])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -41,6 +41,7 @@ class FormFieldsController < ApplicationController
   # POST /form_fields.json
   def create
     @form_field = FormField.new(params[:form_field])
+    @form_field.form = Form.find(params[:form_id])
 
     respond_to do |format|
       if @form_field.save
@@ -60,7 +61,7 @@ class FormFieldsController < ApplicationController
 
     respond_to do |format|
       if @form_field.update_attributes(params[:form_field])
-        format.html { redirect_to @form_field, :notice => 'Form field was successfully updated.' }
+        format.html { redirect_to form_form_fields_path(@form_field.form), :notice => 'Form field was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render :action => "edit" }

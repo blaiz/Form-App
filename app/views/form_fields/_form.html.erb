@@ -12,16 +12,9 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :form %><br />
-    <%= f.text_field :form_id %>
-  </div>
-  <div class="field">
-    <%= f.label :field %><br />
-    <%= f.text_field :field_id %>
-  </div>
-  <div class="field">
-    <%= f.label :weight %><br />
-    <%= f.number_field :weight %>
+    <%= f.label :field_id %><br />
+    <%= select 'form_field', 'field_id', Field.all.collect {|c| [c.label + " (#{c.field_type.label})", c.id]}, :prompt => "Select an existing field" %> or
+    <%= link_to "create a new field", new_field_url, :target => "_blank" %>
   </div>
   <div class="actions">
     <%= f.submit %>

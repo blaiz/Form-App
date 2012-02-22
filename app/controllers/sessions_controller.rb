@@ -1,5 +1,12 @@
 class SessionsController < ApplicationController
+  skip_before_filter :require_login, :only => [:new, :create]
+  
   def new
+    if current_user
+      redirect_to questionnaires_path
+    else
+      @user = User.new
+    end
   end
   
   def create

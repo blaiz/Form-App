@@ -1,19 +1,19 @@
-<h1>Listing form_fields</h1>
+<h1>Listing fields for <%= @form.label %></h1>
 
 <table>
   <tr>
-    <th>Form</th>
     <th>Field</th>
+    <th>Type</th>
     <th>Weight</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
-<% @form_fields.each do |form_field| %>
+<% @form.form_fields.each do |form_field| %>
   <tr>
-    <td><%= form_field.form %></td>
-    <td><%= form_field.field %></td>
+    <td><%= form_field.field.label %></td>
+    <td><%= form_field.field.field_type.label %></td>
     <td><%= form_field.weight %></td>
     <td><%= link_to 'Show', form_field %></td>
     <td><%= link_to 'Edit', edit_form_field_path(form_field) %></td>
@@ -24,4 +24,8 @@
 
 <br />
 
-<%= link_to 'New Form field', new_form_field_path %>
+<%= link_to 'Add a field to this form', new_form_form_field_path %>
+
+<br />
+
+<%= link_to 'Go back to forms', questionnaire_forms_path(@form.questionnaire) %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120217030805) do
+ActiveRecord::Schema.define(:version => 20120217192352) do
 
   create_table "field_types", :force => true do |t|
     t.string   "label"
@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20120217030805) do
     t.string   "name"
     t.integer  "next_form_id"
     t.integer  "next_section_form_id"
+    t.integer  "questionnaire_id"
   end
 
   create_table "groups", :force => true do |t|

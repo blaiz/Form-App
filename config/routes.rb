@@ -1,24 +1,27 @@
 FormApp::Application.routes.draw do
-  resources :groups
+  resources :groups do
+    resources :users
+  end
 
   get "log_out" => "sessions#destroy", :as => "log_out"
   get "log_in" => "sessions#new", :as => "log_in"
-  get "sign_up" => "users#new", :as => "sign_up"
   root :to => "sessions#new"
-  resources :users
   resources :sessions
-
-  resources :form_fields
+  resources :users
   
   resources :questionnaires do
     resources :forms
+    resources :groups
   end
 
   resources :forms do
     resources :form_instances
+    resources :form_fields
   end
   
   resources :form_instances
+
+  resources :form_fields
 
   resources :field_types
 

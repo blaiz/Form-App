@@ -11,7 +11,7 @@
 <% @form.form_instances.each do |form_instance| %>
   <tr>
     <% form_instance.form.form_fields.find_all_by_display(['label', 'show']).each do |form_field| %>
-    <td><%= form_instance.responses.find_or_create_by_form_field_id(form_field.id).value %></td>
+    <td><%= form_instance.responses.find_by_form_field_id(form_field.id).value %></td>
     <% end %>
     <td><%= link_to 'Show', form_instance %></td>
     <td><%= link_to 'Edit', edit_form_instance_path(form_instance) %></td>

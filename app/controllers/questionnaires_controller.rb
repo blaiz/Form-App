@@ -3,7 +3,7 @@ class QuestionnairesController < ApplicationController
   # GET /questionnaires.json
   def index
 #    @questionnaires = Questionnaire.all
-    @questionnaires = current_user.questionnaires
+#    @questionnaires = current_user.questionnaires
 
     respond_to do |format|
       format.html # index.html.erb
@@ -43,7 +43,7 @@ class QuestionnairesController < ApplicationController
   def create
     @questionnaire = Questionnaire.new(params[:questionnaire])
     @group = Group.new(params[:group])
-    @group.group_type = "owner"
+    @group.group_type = "administrator"
     @group.questionnaires << @questionnaire
 
     respond_to do |format|
@@ -63,7 +63,7 @@ class QuestionnairesController < ApplicationController
     @questionnaire = Questionnaire.find(params[:id])
 
     respond_to do |format|
-      if @questionnaire.update_attributes(params[:questionnaire])
+      if @questionnaire.update_attributes(params[:questionnaire]) and @questionnaire.administrator.update_attributes(params[:group])
         format.html { redirect_to @questionnaire, :notice => 'Questionnaire was successfully updated.' }
         format.json { head :no_content }
       else

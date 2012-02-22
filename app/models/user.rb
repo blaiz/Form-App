@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_and_belongs_to_many :groups
   has_many :questionnaires, :through => :groups
-  has_many :questionnaires_owned, :source => :questionnaires, :through => :groups, :conditions => "groups.group_type = 'owner'"
+  has_many :questionnaires_administered, :source => :questionnaires, :through => :groups, :conditions => "groups.group_type = 'administrator'"
   has_many :questionnaires_to_respond, :source => :questionnaires, :through => :groups, :conditions => "groups.group_type = 'respondent'"
   
   attr_accessible :email, :password, :password_confirmation

@@ -2,7 +2,7 @@ class FormsController < ApplicationController
   # GET /forms
   # GET /forms.json
   def index
-    @forms = Form.all
+    @questionnaire = Questionnaire.find(params[:questionnaire_id])
 
     respond_to do |format|
       format.html # index.html.erb

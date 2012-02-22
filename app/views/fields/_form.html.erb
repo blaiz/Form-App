@@ -12,20 +12,13 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :weight %><br />
-    <%= f.text_field :weight %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
     <%= f.label :label %><br />
     <%= f.text_field :label %>
   </div>
   <div class="field">
-    <%= f.label :field_type %><br />
-    <%= select 'field', 'field_type_id', FieldType.find(:all).collect {|c| [c.name, c.id]}, :prompt => "" %>
+    <%= f.label :field_type_id, "Type" %><br />
+    <%= select 'field', 'field_type_id', FieldType.find(:all).collect {|c| [c.label, c.id]}, :prompt => "Select an existing type" %> or
+    <%= link_to "create a new type", new_field_type_url, :target => "_blank" %>
   </div>
   <div class="actions">
     <%= f.submit %>
