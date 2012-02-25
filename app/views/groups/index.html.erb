@@ -1,8 +1,7 @@
-<h1>Listing groups</h1>
+<h1>Listing respondents</h1>
 
 <table>
   <tr>
-    <th>Type</th>
     <th>Name</th>
     <th></th>
     <th></th>
@@ -11,10 +10,10 @@
 
 <% @groups.each do |group| %>
   <tr>
-    <td><%= group.type %></td>
     <td><%= group.name %></td>
     <td><%= link_to 'Show', group %></td>
-    <td><%= link_to 'Edit', edit_group_path(group) %></td>
+    <td><%= link_to 'Rename', edit_group_path(group) %></td>
+    <td><%= link_to 'Edit users', group_users_path(group) %></td>
     <td><%= link_to 'Destroy', group, :confirm => 'Are you sure?', :method => :delete %></td>
   </tr>
 <% end %>
@@ -22,4 +21,4 @@
 
 <br />
 
-<%= link_to 'New Group', new_group_path %>
+<%= link_to 'New Group', new_questionnaire_group_path(@questionnaire) %>

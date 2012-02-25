@@ -21,8 +21,10 @@ class UsersController < ApplicationController
     unless (@user = User.find_by_email(params[:user][:email]))
       @user = User.new(params[:user])
     end
-    @group = Group.find(params[:group_id])
-    @user.groups << @group
+    if params[:group_id]
+      @group = Group.find(params[:group_id])
+      @user.groups << @group
+    end
     if @user.save
       if params[:group_id]
         redirect_to group_users_path(@group), :notice => "User added"

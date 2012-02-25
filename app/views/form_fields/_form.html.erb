@@ -1,4 +1,4 @@
-<%= form_for(@form_field) do |f| %>
+<%= form_for([@form, @form_field]) do |f| %>
   <% if @form_field.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@form_field.errors.count, "error") %> prohibited this form_field from being saved:</h2>
@@ -15,6 +15,10 @@
     <%= f.label :field_id %><br />
     <%= select 'form_field', 'field_id', Field.all.collect {|c| [c.label + " (#{c.field_type.label})", c.id]}, :prompt => "Select an existing field" %> or
     <%= link_to "create a new field", new_field_url, :target => "_blank" %>
+  </div>
+  <div class="field">
+    <%= f.label :display, "Display this field" %><br />
+    <%= select 'form_field', 'display', FormField.display_options, :selected => 'hide' %>
   </div>
   <div class="actions">
     <%= f.submit %>

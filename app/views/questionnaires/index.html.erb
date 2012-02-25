@@ -11,7 +11,7 @@
 <% current_user.questionnaires_to_respond.each do |questionnaire| %>
   <tr>
     <td><%= questionnaire.label %></td>
-    <td><%= link_to 'Respond', create_form_path(questionnaire.start_form) %></td>
+    <td><%= link_to 'Respond', new_form_form_instance_path(questionnaire.start_form) %></td>
   </tr>
 <% end %>
 </table>
@@ -22,7 +22,7 @@
 <table>
   <tr>
     <th>Label</th>
-    <th>Owner</th>
+    <th>Administrator</th>
     <th></th>
     <th></th>
     <th></th>

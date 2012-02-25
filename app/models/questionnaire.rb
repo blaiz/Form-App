@@ -4,7 +4,7 @@ class Questionnaire < ActiveRecord::Base
   belongs_to :start_form, :class_name => "Form"
   
   def administrator
-    self.groups.find_by_group_type("administrator")
+    self.groups.find_by_group_type("administrator") || Group.new
   end
   
   def respondents

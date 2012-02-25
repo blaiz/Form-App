@@ -45,10 +45,11 @@ class QuestionnairesController < ApplicationController
     @group = Group.new(params[:group])
     @group.group_type = "administrator"
     @group.questionnaires << @questionnaire
+    @group.users << current_user
 
     respond_to do |format|
       if @questionnaire.save and @group.save
-        format.html { redirect_to @questionnaire, :notice => 'Questionnaire and group were successfully created.' }
+        format.html { redirect_to questionnaires_path, :notice => 'Questionnaire and group were successfully created.' }
         format.json { render :json => @questionnaire, :status => :created, :location => @questionnaire }
       else
         format.html { render :action => "new" }

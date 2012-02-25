@@ -24,6 +24,7 @@ class FormFieldsController < ApplicationController
   # GET /form_fields/new
   # GET /form_fields/new.json
   def new
+    @form = Form.find_by_name(params[:form_id])
     @form_field = FormField.new
 
     respond_to do |format|
@@ -41,11 +42,11 @@ class FormFieldsController < ApplicationController
   # POST /form_fields.json
   def create
     @form_field = FormField.new(params[:form_field])
-    @form_field.form = Form.find(params[:form_id])
+    @form_field.form = Form.find_by_name(params[:form_id])
 
     respond_to do |format|
       if @form_field.save
-        format.html { redirect_to @form_field, :notice => 'Form field was successfully created.' }
+        format.html { redirect_to form_form_fields_path(@form), :notice => 'Form field was successfully created.' }
         format.json { render :json => @form_field, :status => :created, :location => @form_field }
       else
         format.html { render :action => "new" }

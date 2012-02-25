@@ -2,7 +2,8 @@ class GroupsController < ApplicationController
   # GET /groups
   # GET /groups.json
   def index
-    @groups = Group.all
+    @questionnaire = Questionnaire.find(params[:questionnaire_id])
+    @groups = @questionnaire.respondents
 
     respond_to do |format|
       format.html # index.html.erb
@@ -24,6 +25,7 @@ class GroupsController < ApplicationController
   # GET /groups/new
   # GET /groups/new.json
   def new
+    @questionnaire = Questionnaire.find(params[:questionnaire_id])
     @group = Group.new
 
     respond_to do |format|
@@ -40,11 +42,15 @@ class GroupsController < ApplicationController
   # POST /groups
   # POST /groups.json
   def create
+    @questionnaire = Questionnaire.find(params[:questionnaire_id])
     @group = Group.new(params[:group])
+    @group.group_type = 'respondent'
+    @group.questionnaires << @questionnaire
+    puts YAML::dump(@group.questionnaires)
 
     respond_to do |format|
-      if @group.save
-        format.html { redirect_to @group, :notice => 'Group was successfully created.' }
+      if @group.save and @questionnaire.save
+        format.html { redirect_to questionnaire_groups_path(@questionnaire), :notice => 'Group was successfully created.' }
         format.json { render :json => @group, :status => :created, :location => @group }
       else
         format.html { render :action => "new" }
