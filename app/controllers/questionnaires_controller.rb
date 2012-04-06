@@ -4,10 +4,16 @@ class QuestionnairesController < ApplicationController
   def index
 #    @questionnaires = Questionnaire.all
 #    @questionnaires = current_user.questionnaires
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render :json => @questionnaires }
+    if params[:mode] == 'administer'
+      respond_to do |format|
+        format.html # index.html.erb
+        format.json { render :json => @questionnaires }
+      end
+    else
+      respond_to do |format|
+        format.html { render 'respond.index' }
+        format.json { render :json => @questionnaires }
+      end
     end
   end
 

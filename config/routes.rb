@@ -4,8 +4,9 @@ FormApp::Application.routes.draw do
   end
 
   get "log_out" => "sessions#destroy", :as => "log_out"
-  get "log_in" => "sessions#new", :as => "log_in"
-  root :to => "sessions#new"
+  get "create" => "users#new", :as => "sign_up"
+  get "administer" => "sessions#new", :as => "administer", :defaults => { :mode => 'administer' }
+  root :to => "sessions#new", :defaults => { :mode => 'respond' }
   resources :sessions
   resources :users
   

@@ -1,0 +1,21 @@
+<h1>Listing questionnaires</h1>
+
+<div>
+<h2>Questionnaires to respond</h2>
+<table>
+  <tr>
+    <th>Label</th>
+    <th></th>
+  </tr>
+
+<% current_user.questionnaires_to_respond.each do |questionnaire| %>
+  <tr>
+    <td><%= questionnaire.label %></td>
+    <td><%= link_to 'Respond', new_form_form_instance_path(questionnaire.start_form) %></td>
+  </tr>
+<% end %>
+</table>
+</div>
+
+<%= link_to 'Create New Questionnaire', new_questionnaire_path %>
+</div>

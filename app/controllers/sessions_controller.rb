@@ -13,6 +13,7 @@ class SessionsController < ApplicationController
     user = User.authenticate(params[:email], params[:password])
     if user
       session[:user_id] = user.id
+      session[:mode] = params[:mode]
       redirect_to questionnaires_path, :notice => "Logged in"
     else
       @user = User.new
